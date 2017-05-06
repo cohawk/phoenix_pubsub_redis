@@ -30,6 +30,9 @@ defmodule Phoenix.PubSub.RedisServer do
     redis_msg = {@redis_msg_vsn, node_ref, fastlane, pool_size, from_pid, topic, msg}
     bin_msg   = :erlang.term_to_binary(redis_msg)
 
+    IO.inspect(namespace, label: "Phoenix.PubSub.RedisServer do_broadcast namespace")
+    IO.inspect(bin_msg, label: "Phoenix.PubSub.RedisServer do_broadcast bin_msg")
+
     :poolboy.transaction pool_name, fn worker_pid ->
       case Redix.command(worker_pid, ["PUBLISH", namespace, bin_msg]) do
         {:ok, _} -> :ok
