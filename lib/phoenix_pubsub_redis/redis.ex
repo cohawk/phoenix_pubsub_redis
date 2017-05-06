@@ -40,6 +40,8 @@ defmodule Phoenix.PubSub.Redis do
 
   """
 
+  ## TODO - remove poolboy dependancy to random Redix stragedy
+
   @redis_pool_size 5
   @defaults [host: "127.0.0.1", port: 6379]
 
